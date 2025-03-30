@@ -11,7 +11,9 @@ class Reader
     {
         $items = static::readFile($file);
         if (empty($filters)) {
-            return $items;
+            foreach ($items as $item) {
+                yield $item;
+            }
         } else {
             foreach ($items as $item) {
                 if (array_all($filters, fn ($filter) => self::filterItem($filter, $item))) {
