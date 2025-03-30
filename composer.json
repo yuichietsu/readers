@@ -1,0 +1,16 @@
+{
+    "name": "menrui/readers",
+	"version": "0.0.1",
+    "description": "readers for various formats",
+    "type": "project",
+    "license": "MIT",
+    "scripts": {},
+    "autoload": {
+        "psr-4": {
+            "Menrui\\": "src/"
+        }
+    },
+    "require": {
+            "menrui/menrui": "*"
+    }
+}
