@@ -2,36 +2,16 @@
 
 namespace Menrui\Reader;
 
+use Iterator;
+use Menrui\Reader;
 use SimpleXMLElement;
 
-class MameDat
+class MameDat extends Reader
 {
-    public static function readGames(string $datFile, array $filters = []): array
+    public static function readFile(string $file): Iterator
     {
-        $ret = [];
-        $xml = simplexml_load_file($datFile);
-        $games = $xml->game ?: $xml->machine;
-        foreach ($games as $game) {
-            if (
-                0 === count($filters) || array_all(
-                    $filters,
-                    function ($filter) use ($game) {
-                        if (is_string($filter)) {
-                            $method = 'is' . ucfirst($filter);
-                            if (method_exists(self::class, $method) && self::$method($game)) {
-                                return true;
-                            }
-                        }
-                        if (is_callable($filter) && call_user_func($filter, $game)) {
-                            return true;
-                        }
-                    }
-                )
-            ) {
-                $ret[] = $game;
-            }
-        }
-        return $ret;
+        $xml = simplexml_load_file($file);
+        return $xml->game ?: $xml->machine;
     }
 
     public static function isOriginal(SimpleXMLElement $game): bool
