@@ -1,6 +1,6 @@
 {
     "name": "menrui/readers",
-	"version": "0.0.2",
+	"version": "0.0.3",
     "description": "readers for various formats",
     "type": "project",
     "license": "MIT",
@@ -11,6 +11,6 @@
         }
     },
     "require": {
-            "menrui/menrui": "*"
+        "menrui/menrui": "*"
     }
 }

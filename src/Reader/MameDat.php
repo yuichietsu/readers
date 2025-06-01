@@ -24,6 +24,11 @@ class MameDat extends Reader
         return !$game->softwarelist;
     }
 
+    public static function isNoChd(SimpleXMLElement $game): bool
+    {
+        return !$game->disk;
+    }
+
     public static function isPlayable(SimpleXMLElement $game): bool
     {
         $isBios    = (string)$game['isbios'] === 'yes';

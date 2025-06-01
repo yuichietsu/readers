@@ -4,6 +4,7 @@ namespace Menrui;
 
 use Iterator;
 use Menrui\Exception;
+use Menrui\Utils\Strings;
 
 class Reader
 {
@@ -35,17 +36,18 @@ class Reader
         fclose($handle);
     }
 
-    public static function filterItem(string $filter, mixed $item): bool
+    public static function filterItem(string|callable $filter, mixed $item): bool
     {
         if (is_string($filter)) {
-            $method = 'is' . ucfirst($filter);
-            if (method_exists(static::class, $method) && static::$method($item)) {
-                return true;
+            $method = 'is' . Strings::snakeToPascal($filter);
+            if (method_exists(static::class, $method)) {
+                return static::$method($item);
             }
         }
-        if (is_callable($filter) && call_user_func($filter, $item)) {
-            return true;
+        if (is_callable($filter)) {
+            return call_user_func($filter, $item);
         }
-        return false;
+        $name = is_string($filter) ? $filter : gettype($filter);
+        throw new Exception("Filter not found: $name");
     }
 }

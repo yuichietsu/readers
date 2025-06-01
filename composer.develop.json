@@ -1,0 +1,13 @@
+{
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../menrui"
+    }
+  ],
+  "require": {
+    "menrui/menrui": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
