@@ -11,6 +11,6 @@
         }
     },
     "require": {
-        "menrui/menrui": "*"
+        "menrui/menrui": ">=0.0.3"
     }
 }
